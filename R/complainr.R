@@ -32,7 +32,7 @@ complain <- function(x, ...) {
     out <- explain(x, ...)
 
     idx <- options("complaint_index")$complaint_index
-    complaint <- complaints[idx]
+    complaint <- complaints[idx + 1]
     options(complaint_index = (idx + 1) %% length(complaints))
     out <- explainr_output(paste(out, complaint, sep = "\n\n"))
 
@@ -40,4 +40,7 @@ complain <- function(x, ...) {
 }
 
 
-options(complaint_index = 1)
+#' onload
+.onLoad <- function(libname, pkgname) {
+    options(complaint_index = 0)
+}
